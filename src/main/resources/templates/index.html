@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>新闻信息列表</title>
+    <link rel="stylesheet" th:href="@{css/layout.css}" />
+    <script th:src="@{js/jquery-1.12.4.min.js}"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "list",
+                dataType:"json",
+                async:false,
+                success: function(obj){
+                    $(".tab_news:not(:first)").remove();
+                    $.each(obj,function (key,value) {
+                        var tr="<tr >";
+                        if(key%2!=0){
+                            tr="<tr class='bg'>";
+                        }
+                        $.each(value,function (k,v) {
+                            tr+="<td>"+v+"</td>";
+                        })
+                        tr+='<td><a href="view/'+value.id+'">评论</a> <a class="del" id="'+value.id+'" href="javascript:void(0);">删除</a></td></tr>';
+                        $(".tab_news").append($(tr));
+                    })
+                }
+            });
+            /**
+             * 动态绑定删除事件
+             */
+            $(".del").on("click",function () {
+                var obj=$(this);
+                if(confirm("是否删除新闻及评论?")){
+                    $.get("del/"+obj.attr("id"),function (data) {
+                        alert(data.message);
+                        if(data.success){
+                            obj.parents("tr").remove();
+                        }
+                    },"json");
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="containner">
+        <h1>新闻列表</h1>
+        <table class="tab_news">
+            <tr class="title">
+                <td>新闻编号</td>
+                <td>新闻标题</td>
+                <td>新闻摘要</td>
+                <td>作者</td>
+                <td>创建时间</td>
+                <td>操作</td>
+            </tr>
+            <!--<tr  th:each="news,i : ${news}" th:class="${i.even}?'bg'">-->
+                <!--<td th:text="${news.id}"></td>-->
+                <!--<td th:text="${news.title}"></td>-->
+                <!--<td th:text="${news.summary}"></td>-->
+                <!--<td th:text="${news.author}"></td>-->
+                <!--<td th:text="${#dates.format(news.createdate,'yyyy-MM-dd HH:mm')}"></td>-->
+                <!--<td>-->
+                    <!--<a th:href="@{|view/${news.id}|}">评论</a>-->
+                    <!--<a th:href="@{|del/${news.id}|}">删除</a>-->
+                <!--</td>-->
+            <!--</tr>-->
+        </table>
+    </div>
+</body>
+</html>

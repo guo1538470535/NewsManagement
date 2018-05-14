@@ -1,0 +1,38 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.containner{
+    width: 1024px;
+    margin: 0px auto;
+    border: solid 1px #ccc;
+}
+.containner h1{
+    text-align: center;
+    margin: 10px 0px;
+}
+.tab_news{
+    height: 260px;
+    width: 1024px;
+    border-collapse: collapse;
+}
+.tab_news tr,.tab_news td{
+    border: solid 1px #ccc;
+}
+.tab_news .title{
+    font-weight: bold;
+}
+.bg{
+    background-color: #cccccc;
+}
+.a_tab{
+    width: 600px;
+    height: 300px;
+    border-collapse: collapse;
+}
+.a_tab td{
+    border: solid 1px #ccc;
+}
+.c_c{
+    text-align: center;
+}

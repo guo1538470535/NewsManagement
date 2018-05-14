@@ -1,0 +1,27 @@
+#服务器端口
+server:
+  port: 80
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: accp
+    url: jdbc:mysql://127.0.0.1:3306/newsmanagement?useUnicode=true&characterEncoding=utf-8
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
+    mode: LEGACYHTML5
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+#MyBatis 配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.jbit.entity
+#LogBack日志配置
+logging:
+  config: classpath:logback-spring.xml
+
